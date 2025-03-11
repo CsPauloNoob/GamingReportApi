@@ -1,4 +1,5 @@
 ﻿using GamingReport.Core._Game;
+using GamingReport.Core._Game.Enums;
 
 namespace GamingReport.Core.Reviews
 {
@@ -8,6 +9,7 @@ namespace GamingReport.Core.Reviews
         public string Content { get; set; }
 
         public decimal Score { get; set; }
+        public Platforms GamePlatform { get; set; }
 
         public int UpPoints { get; set; }
         public int DownPoints { get; set; }

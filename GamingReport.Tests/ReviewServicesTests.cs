@@ -21,7 +21,7 @@ namespace GamingReport.Tests
         public void AddReview_ShouldCallAddMethodOfRepository()
         {
             // Arrange
-            var review = new Review { Title = "Test Review", Content = "Test Content", Score = 5.0f };
+            var review = new Review { Title = "Test Review", Content = "Test Content", Score = 5.0m };
 
             // Act
             _reviewServices.AddReview(review);
