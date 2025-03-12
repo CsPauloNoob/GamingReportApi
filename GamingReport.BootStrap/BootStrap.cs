@@ -10,6 +10,7 @@ using GamingReport.Core.Interfaces;
 using GamingReport.Core.Reviews;
 using GamingReport.Infra.Repositories;
 using Microsoft.EntityFrameworkCore;
+using GamingReport.Core._Game;
 
 namespace GamingReport.DI
 {
@@ -27,6 +28,7 @@ namespace GamingReport.DI
             services.AddTransient<IReviewService, ReviewServices>();
 
             services.AddScoped<IRepository<Review>, Repository<Review>>();
+            services.AddScoped<IRepository<Game>, Repository<Game>>();
             //services.AddScoped(typeof(IRepository<Review>), typeof(Repository<Review>));
 
 

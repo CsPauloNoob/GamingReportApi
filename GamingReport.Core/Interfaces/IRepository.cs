@@ -22,6 +22,6 @@ namespace GamingReport.Core.Interfaces
 
         public IEnumerable<T> GetAll();
 
-        public IEnumerable<T> GetByCondition(Expression<Func<T, bool>> condition, bool disableLazyLoading = false);
+        public IEnumerable<T> GetByCondition(string id, string rowName = null,params Expression<Func<T, object>>[] includes);
     }
 }

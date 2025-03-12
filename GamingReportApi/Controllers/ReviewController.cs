@@ -24,8 +24,10 @@ namespace GamingReportApi.Controllers
         [HttpGet("/get/{gameName}")]
         public IActionResult GetByGameName(string gameName)
         {
-            _reviewServices.GetReviewByGameName(gameName);
-            return Ok();
+            var review = _reviewServices.GetReviewByGameName(gameName);
+            return Ok(review);
         }
+        //TODO: Implementar mapster, implementar padrão de retorno.
+
     }
 }

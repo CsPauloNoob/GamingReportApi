@@ -37,8 +37,16 @@ namespace GamingReport.Core.Reviews.Services
 
         public Review GetReviewByGameName(string gameName)
         {
-            var review = _reviewCtx.GetByCondition(r => r.) 
-            
+            Game game = _gameCtx.GetByName(gameName);
+
+            if(game is null)
+            {
+                //lógica para adicionar um retorno de erro
+                //implementar padrão de retorno de erro para evitar exceções
+            }
+
+            Review review = _reviewCtx.GetByCondition(game.Id, "GameId").FirstOrDefault()!;
+
             return review;
         }
     }

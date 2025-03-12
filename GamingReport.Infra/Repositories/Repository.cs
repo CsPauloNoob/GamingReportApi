@@ -54,16 +54,18 @@ namespace GamingReport.Infra.Repositories
             return _dbSet.ToList();
         }
 
-        public IEnumerable<T> GetByCondition(object t, Expression<Func<T, bool>> condition, bool disableLazyLoading = false)
+        public IEnumerable<T> GetByCondition(string id, string rowName = null, params Expression<Func<T, object>>[] includes)
         {
-            // var query = _dbSet.AsQueryable();
-            //
-            // if (disableLazyLoading)
-            // {
-            //     query = query.AsNoTracking().Include(x => x.Game);
-            // }
+            IQueryable<T> query = _dbSet;
+            foreach (var include in includes)
+            {
+                query = query.Include(include);
+            }
 
-            _dbSet.Include(x => x == t);
+            if(rowName is not null)
+                return query.Where(e => EF.Property<string>(e, rowName) == id);
+
+            return query.Where(e => EF.Property<string>(e, "Id") == id);
         }
     }
 }
