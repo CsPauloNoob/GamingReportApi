@@ -10,5 +10,5 @@ public class ReviewVM
     public int UpPoints { get; set; }
     public int DownPoints { get; set; }
     
-    
+    public GameVM Game { get; set; } = null!;
 }

@@ -15,5 +15,7 @@ namespace GamingReport.Core.Reviews.Interfaces
         void DeleteReview(Review review);
 
         void UpdateReview(Review review);
+        
+        Review GetReviewByGameName(string gameName);
     }
 }

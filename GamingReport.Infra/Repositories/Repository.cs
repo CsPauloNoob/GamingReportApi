@@ -3,8 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using GamingReport.Core._Game;
 
 namespace GamingReport.Infra.Repositories
 {
@@ -52,9 +54,16 @@ namespace GamingReport.Infra.Repositories
             return _dbSet.ToList();
         }
 
-        public IEnumerable<T> GetByCondition(Func<T, bool> condition)
+        public IEnumerable<T> GetByCondition(object t, Expression<Func<T, bool>> condition, bool disableLazyLoading = false)
         {
-            return _dbSet.Where(condition).ToList();
+            // var query = _dbSet.AsQueryable();
+            //
+            // if (disableLazyLoading)
+            // {
+            //     query = query.AsNoTracking().Include(x => x.Game);
+            // }
+
+            _dbSet.Include(x => x == t);
         }
     }
 }

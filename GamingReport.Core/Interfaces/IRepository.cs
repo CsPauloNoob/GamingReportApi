@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -21,6 +22,6 @@ namespace GamingReport.Core.Interfaces
 
         public IEnumerable<T> GetAll();
 
-        public IEnumerable<T> GetByCondition(Func<T, bool> condition);
+        public IEnumerable<T> GetByCondition(Expression<Func<T, bool>> condition, bool disableLazyLoading = false);
     }
 }

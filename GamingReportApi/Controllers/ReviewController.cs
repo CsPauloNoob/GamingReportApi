@@ -20,5 +20,12 @@ namespace GamingReportApi.Controllers
             var reviews = _reviewServices.GetReviewById("10a9521d-fdeb-4ebd-ab05-c6a980a65f88");
             return Ok(reviews);
         }
+
+        [HttpGet("/get/{gameName}")]
+        public IActionResult GetByGameName(string gameName)
+        {
+            _reviewServices.GetReviewByGameName(gameName);
+            return Ok();
+        }
     }
 }
