@@ -44,6 +44,11 @@ namespace GamingReport.Infra.Repositories
             return _dbSet.Find(id);
         }
 
+        public IEnumerable<T> GetWithLimit(int max)
+        {
+            return _dbSet.Take(max);
+        }
+
         public T GetByName(string name)
         {
             return _dbSet.FirstOrDefault(e => EF.Property<string>(e, "Name") == name);
@@ -54,7 +59,7 @@ namespace GamingReport.Infra.Repositories
             return _dbSet.ToList();
         }
 
-        public IEnumerable<T> GetByCondition(string id, string rowName = null, params Expression<Func<T, object>>[] includes)
+        public IEnumerable<T> GetWithRelatedItens(string id = null, string rowName = null, params Expression<Func<T, object>>[] includes)
         {
             IQueryable<T> query = _dbSet;
             foreach (var include in includes)
@@ -64,7 +69,7 @@ namespace GamingReport.Infra.Repositories
 
             if(rowName is not null)
                 return query.Where(e => EF.Property<string>(e, rowName) == id);
-
+            
             return query.Where(e => EF.Property<string>(e, "Id") == id);
         }
     }

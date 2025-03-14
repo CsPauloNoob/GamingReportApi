@@ -14,14 +14,21 @@ namespace GamingReportApi.Controllers
             _reviewServices = reviewServices;
         }
 
-        [HttpGet("/get")]
-        public IActionResult GetById()
+        [HttpGet]
+        public async Task<IActionResult> GetLastReviews(int pageSize = 5)
         {
-            var reviews = _reviewServices.GetReviewById("10a9521d-fdeb-4ebd-ab05-c6a980a65f88");
-            return Ok(reviews);
+            _reviewServices
         }
 
-        [HttpGet("/get/{gameName}")]
+        [HttpGet("/get/{id}")]
+        public IActionResult GetById(string id)
+        {
+            var review = _reviewServices.GetReviewById(id);
+            
+            return Ok(review);
+        }
+
+        [HttpGet("/get-gamename/{game-name}")]
         public IActionResult GetByGameName(string gameName)
         {
             var review = _reviewServices.GetReviewByGameName(gameName);

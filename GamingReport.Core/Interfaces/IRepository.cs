@@ -22,6 +22,8 @@ namespace GamingReport.Core.Interfaces
 
         public IEnumerable<T> GetAll();
 
-        public IEnumerable<T> GetByCondition(string id, string rowName = null,params Expression<Func<T, object>>[] includes);
+        public IEnumerable<T> GetWithLimit(int max);
+
+        public IEnumerable<T> GetWithRelatedItens(string id, string rowName = null,params Expression<Func<T, object>>[] includes);
     }
 }

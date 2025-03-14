@@ -30,6 +30,11 @@ namespace GamingReport.Core.Reviews.Services
             return _reviewCtx.GetById(id);
         }
 
+        public List<Review> GetReviews(int maxReviews)
+        {
+            
+        }
+
         public void UpdateReview(Review review)
         {
             _reviewCtx.Update(review);
@@ -45,7 +50,7 @@ namespace GamingReport.Core.Reviews.Services
                 //implementar padrão de retorno de erro para evitar exceções
             }
 
-            Review review = _reviewCtx.GetByCondition(game.Id, "GameId").FirstOrDefault()!;
+            Review review = _reviewCtx.GetWithRelatedItens(game.Id, "GameId").FirstOrDefault()!;
 
             return review;
         }

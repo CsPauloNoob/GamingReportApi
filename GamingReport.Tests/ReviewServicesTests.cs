@@ -1,3 +1,4 @@
+using GamingReport.Core._Game;
 using GamingReport.Core.Interfaces;
 using GamingReport.Core.Reviews;
 using GamingReport.Core.Reviews.Services;
@@ -8,13 +9,17 @@ namespace GamingReport.Tests
 {
     public class ReviewServicesTests
     {
-        private readonly Mock<IRepository<Review>> _mockRepository;
+        private readonly Mock<IRepository<Review>> _mockReviewRepository;
+        private readonly Mock<IRepository<Game>> _mockGameRepository;
         private readonly ReviewServices _reviewServices;
 
         public ReviewServicesTests()
         {
-            _mockRepository = new Mock<IRepository<Review>>();
-            _reviewServices = new ReviewServices(_mockRepository.Object);
+            _mockReviewRepository = new Mock<IRepository<Review>>();
+            _mockGameRepository = new Mock<IRepository<Game>>();
+            
+            _reviewServices = new ReviewServices(_mockReviewRepository.Object,
+                _mockGameRepository.Object);
         }
 
         [Fact]
@@ -27,7 +32,7 @@ namespace GamingReport.Tests
             _reviewServices.AddReview(review);
 
             // Assert
-            _mockRepository.Verify(r => r.Add(It.IsAny<Review>()), Times.Once);
+            _mockReviewRepository.Verify(r => r.Add(It.IsAny<Review>()), Times.Once);
         }
     }
 }
