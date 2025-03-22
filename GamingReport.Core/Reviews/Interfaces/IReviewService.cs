@@ -8,14 +8,16 @@ namespace GamingReport.Core.Reviews.Interfaces
 {
     public interface IReviewService
     {
-        void AddReview(Review review);
+        ServiceResponse<bool> AddReview(Review review);
 
-        Review GetReviewById(string id);
+        ServiceResponse<Review> GetReviewById(string id);
 
-        void DeleteReview(Review review);
+        ServiceResponse<bool> DeleteReview(Review review);
 
-        void UpdateReview(Review review);
+        ServiceResponse<bool> UpdateReview(Review review);
         
-        Review GetReviewByGameName(string gameName);
+        ServiceResponse<Review> GetReviewByGameName(string gameName);
+
+        public List<Review> GetReviews(int maxReviews);
     }
 }

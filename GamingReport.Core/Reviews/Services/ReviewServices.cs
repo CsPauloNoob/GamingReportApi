@@ -15,44 +15,54 @@ namespace GamingReport.Core.Reviews.Services
             _gameCtx = gameCtx;
         }
 
-        public void AddReview(Review review)
+        public ServiceResponse<bool> AddReview(Review review)
         {
+            review.Id = Guid.NewGuid().ToString();
+            
             _reviewCtx.Add(review);
+
+            return ServiceResponse<bool>.Success(true);
         }
 
-        public void DeleteReview(Review review)
+        public ServiceResponse<bool> DeleteReview(Review review)
         {
             _reviewCtx.Delete(review);
+
+            return ServiceResponse<bool>.Success(true);
         }
 
-        public Review GetReviewById(string id)
+        public ServiceResponse<Review> GetReviewById(string id)
         {
-            return _reviewCtx.GetById(id);
+            Review review = _reviewCtx?.GetById(id);
+            
+            if(review is null)
+                return ServiceResponse<Review>.NotFound();
+            
+            return ServiceResponse<Review>.Success(review);
         }
 
         public List<Review> GetReviews(int maxReviews)
         {
-            
+            return new();
         }
 
-        public void UpdateReview(Review review)
+        public ServiceResponse<bool> UpdateReview(Review review)
         {
             _reviewCtx.Update(review);
+            
+            return ServiceResponse<bool>.Success(true);
         }
 
-        public Review GetReviewByGameName(string gameName)
+        public ServiceResponse<Review> GetReviewByGameName(string gameName)
         {
-            Game game = _gameCtx.GetByName(gameName);
+            Game game = _gameCtx?.GetByName(gameName);
 
             if(game is null)
-            {
-                //lógica para adicionar um retorno de erro
-                //implementar padrão de retorno de erro para evitar exceções
-            }
+                return ServiceResponse<Review>.NotFound("Game not found");
 
             Review review = _reviewCtx.GetWithRelatedItens(game.Id, "GameId").FirstOrDefault()!;
 
-            return review;
+            return ServiceResponse<Review>.Success(review);
         }
     }
 }

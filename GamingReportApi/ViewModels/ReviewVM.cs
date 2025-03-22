@@ -4,6 +4,7 @@ public class ReviewVM
 {
     public string Title { get; set; } = null!;
     public string Content { get; set; } = null!;
+    public DateTime CreatedAt { get; set; }
 
     public decimal Score { get; set; }
 

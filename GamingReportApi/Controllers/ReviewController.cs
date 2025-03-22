@@ -1,5 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using GamingReport.Core;
+using GamingReport.Core.Reviews;
+using Microsoft.AspNetCore.Mvc;
 using GamingReport.Core.Reviews.Interfaces;
+using GamingReportApi.InputModels;
+using GamingReportApi.ViewModels;
+using Mapster;
 
 namespace GamingReportApi.Controllers
 {
@@ -14,10 +19,12 @@ namespace GamingReportApi.Controllers
             _reviewServices = reviewServices;
         }
 
+        #region GetRegion
+        
         [HttpGet]
         public async Task<IActionResult> GetLastReviews(int pageSize = 5)
         {
-            _reviewServices
+            return Ok();
         }
 
         [HttpGet("/get/{id}")]
@@ -28,13 +35,37 @@ namespace GamingReportApi.Controllers
             return Ok(review);
         }
 
-        [HttpGet("/get-gamename/{game-name}")]
+        [HttpGet("/get-from/{gameName}")]
         public IActionResult GetByGameName(string gameName)
         {
-            var review = _reviewServices.GetReviewByGameName(gameName);
-            return Ok(review);
+            var response = _reviewServices.GetReviewByGameName(gameName);
+
+            var mappedResponse = response.Data != null
+                ? ServiceResponse<ReviewVM>.Success(response.Data.Adapt<ReviewVM>())
+                : ServiceResponse<ReviewVM>.Error(response.Message??"Unknown Error");
+
+            return mappedResponse.Status switch
+            {
+                ResponseStatus.Succes => Ok(mappedResponse),
+                ResponseStatus.Error => NotFound(mappedResponse),
+                _ => BadRequest(mappedResponse)
+            };
         }
-        //TODO: Implementar mapster, implementar padrão de retorno.
+        
+        #endregion
+
+
+        #region PostRegion
+
+        [HttpPost]
+        public async Task<IActionResult> PostReview(ReviewIM inputReview)
+        {
+            var review = inputReview.Adapt<Review>();
+            _reviewServices.AddReview(review);
+            return Created();
+        }
+
+        #endregion
 
     }
 }
