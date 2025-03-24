@@ -1,5 +1,6 @@
 ﻿using GamingReport.Core._Developer;
 using GamingReport.Core._Game.Enums;
+using System.Diagnostics.CodeAnalysis;
 
 namespace GamingReport.Core._Game
 {
@@ -12,6 +13,9 @@ namespace GamingReport.Core._Game
 
         public string DeveloperId { get; set; }
         public Developer Developer { get; set; }
+
+        [AllowNull]
+        public int SteamGameId { get; set; }
 
         public Game() {}
 

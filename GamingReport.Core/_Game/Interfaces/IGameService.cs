@@ -1,4 +1,7 @@
-﻿namespace GamingReport.Core._Game.Interfaces
+﻿using GamingReport.Core.Response;
+
+
+namespace GamingReport.Core._Game.Interfaces
 {
     public interface IGameService
     {
@@ -8,6 +11,8 @@
 
         void DeleteGame(Game game);
 
-        Game GetGameById(int id);
+        ServiceResponse<Game> GetGameById(int id);
+
+        ServiceResponse<Game> GetGameByName(string name);
     }
 }

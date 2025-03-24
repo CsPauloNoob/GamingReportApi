@@ -1,4 +1,4 @@
-namespace GamingReport.Core;
+namespace GamingReport.Core.Response;
 
 public enum ResponseStatus
 {
