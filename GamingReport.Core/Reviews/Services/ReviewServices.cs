@@ -1,5 +1,6 @@
 ﻿using GamingReport.Core._Game;
 using GamingReport.Core.Interfaces;
+using GamingReport.Core.Response;
 using GamingReport.Core.Reviews.Interfaces;
 
 namespace GamingReport.Core.Reviews.Services

@@ -1,10 +1,10 @@
-﻿using GamingReport.Core;
-using GamingReport.Core.Reviews;
+﻿using GamingReport.Core.Reviews;
 using Microsoft.AspNetCore.Mvc;
 using GamingReport.Core.Reviews.Interfaces;
 using GamingReportApi.InputModels;
 using GamingReportApi.ViewModels;
 using Mapster;
+using GamingReport.Core.Response;
 
 namespace GamingReportApi.Controllers
 {

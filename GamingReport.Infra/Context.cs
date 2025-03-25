@@ -1,4 +1,5 @@
-﻿using GamingReport.Core._Developer;
+﻿using GamingReport.Core;
+using GamingReport.Core._Developer;
 using GamingReport.Core._Game;
 using GamingReport.Core._Game.Enums;
 using GamingReport.Core.Reviews;
@@ -18,6 +19,9 @@ namespace GamingReport.Infra
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //Faz o nome do game ser unico no banco
+            modelBuilder.Entity<Game>().HasIndex(g => g.Name).IsUnique();
+
             base.OnModelCreating(modelBuilder);
 
             var developer1 = new Developer
