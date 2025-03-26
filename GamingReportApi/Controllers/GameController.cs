@@ -35,8 +35,8 @@ namespace GamingReportApi.Controllers
             return Created();
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetGameByName([FromQuery] string name)
+        [HttpGet("{name}")]
+        public async Task<IActionResult> GetGameByName(string name)
         {
             var response = _gameService.GetGameByName(name);
             if (response.IsSuccess)
